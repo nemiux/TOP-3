@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities1">
+    <EntitySetMapping Name="Kategorija">
+      <EntityTypeMapping TypeName="dbModel.Kategorija">
+        <MappingFragment StoreEntitySet="Kategorija">
+          <ScalarProperty Name="KategorijosID" ColumnName="KategorijosID" />
+          <ScalarProperty Name="Vardas" ColumnName="Vardas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PerkamaPreke">
+      <EntityTypeMapping TypeName="dbModel.PerkamaPreke">
+        <MappingFragment StoreEntitySet="PerkamaPreke">
+          <ScalarProperty Name="transakcijosID" ColumnName="transakcijosID" />
+          <ScalarProperty Name="prekesNr" ColumnName="prekesNr" />
+          <ScalarProperty Name="PerkamasKiekis" ColumnName="PerkamasKiekis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Preke">
+      <EntityTypeMapping TypeName="dbModel.Preke">
+        <MappingFragment StoreEntitySet="Preke">
+          <ScalarProperty Name="prekesNr" ColumnName="prekesNr" />
+          <ScalarProperty Name="Pavadinimas" ColumnName="Pavadinimas" />
+          <ScalarProperty Name="Kiekis" ColumnName="Kiekis" />
+          <ScalarProperty Name="Kaina" ColumnName="Kaina" />
+          <ScalarProperty Name="KategorijosID" ColumnName="KategorijosID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transakcijos">
+      <EntityTypeMapping TypeName="dbModel.Transakcijos">
+        <MappingFragment StoreEntitySet="Transakcijos">
+          <ScalarProperty Name="transakcijosID" ColumnName="transakcijosID" />
+          <ScalarProperty Name="VartotojoVardas" ColumnName="VartotojoVardas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vartotojas">
+      <EntityTypeMapping TypeName="dbModel.Vartotojas">
+        <MappingFragment StoreEntitySet="Vartotojas">
+          <ScalarProperty Name="VartotojoVardas" ColumnName="VartotojoVardas" />
+          <ScalarProperty Name="Slaptazodis" ColumnName="Slaptazodis" />
+          <ScalarProperty Name="Miestas" ColumnName="Miestas" />
+          <ScalarProperty Name="Gatve" ColumnName="Gatve" />
+          <ScalarProperty Name="Namas" ColumnName="Namas" />
+          <ScalarProperty Name="Butas" ColumnName="Butas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prekiu_perkamumas">
+      <EntityTypeMapping TypeName="dbModel.prekiu_perkamumas">
+        <MappingFragment StoreEntitySet="prekiu_perkamumas">
+          <ScalarProperty Name="Pavadinimas" ColumnName="Pavadinimas" />
+          <ScalarProperty Name="PerkamasKiekis" ColumnName="PerkamasKiekis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suma">
+      <EntityTypeMapping TypeName="dbModel.Suma">
+        <MappingFragment StoreEntitySet="Suma">
+          <ScalarProperty Name="transakcijosID" ColumnName="transakcijosID" />
+          <ScalarProperty Name="VartotojoVardas" ColumnName="VartotojoVardas" />
+          <ScalarProperty Name="Sum" ColumnName="Sum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

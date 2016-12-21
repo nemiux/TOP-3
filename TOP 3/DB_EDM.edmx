@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kategorija">
+          <Key>
+            <PropertyRef Name="KategorijosID" />
+          </Key>
+          <Property Name="KategorijosID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vardas" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PerkamaPreke">
+          <Key>
+            <PropertyRef Name="transakcijosID" />
+            <PropertyRef Name="prekesNr" />
+          </Key>
+          <Property Name="transakcijosID" Type="int" Nullable="false" />
+          <Property Name="prekesNr" Type="int" Nullable="false" />
+          <Property Name="PerkamasKiekis" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Preke">
+          <Key>
+            <PropertyRef Name="prekesNr" />
+          </Key>
+          <Property Name="prekesNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pavadinimas" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Kiekis" Type="int" Nullable="false" />
+          <Property Name="Kaina" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrekiuKategorijos">
+          <Key>
+            <PropertyRef Name="prekesNr" />
+            <PropertyRef Name="KategorijosID" />
+          </Key>
+          <Property Name="prekesNr" Type="int" Nullable="false" />
+          <Property Name="KategorijosID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transakcijos">
+          <Key>
+            <PropertyRef Name="transakcijosID" />
+          </Key>
+          <Property Name="transakcijosID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VartotojoVardas" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vartotojas">
+          <Key>
+            <PropertyRef Name="VartotojoVardas" />
+          </Key>
+          <Property Name="VartotojoVardas" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Slaptazodis" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Miestas" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gatve" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Namas" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Butas" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\TOMAS\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\TOP 3\TOP 3\DB.MDF.dbo.prekiu_perkamumas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="prekiu_perkamumas">
+          <Key>
+            <PropertyRef Name="Pavadinimas" />
+          </Key>
+          <Property Name="Pavadinimas" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PerkamasKiekis" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\TOMAS\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\TOP 3\TOP 3\DB.MDF.dbo.Suma' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Suma">
+          <Key>
+            <PropertyRef Name="transakcijosID" />
+            <PropertyRef Name="VartotojoVardas" />
+          </Key>
+          <Property Name="transakcijosID" Type="int" Nullable="false" />
+          <Property Name="VartotojoVardas" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <Association Name="FK_PerkamaPreke_preke">
+          <End Role="Preke" Type="Self.Preke" Multiplicity="1" />
+          <End Role="PerkamaPreke" Type="Self.PerkamaPreke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Preke">
+              <PropertyRef Name="prekesNr" />
+            </Principal>
+            <Dependent Role="PerkamaPreke">
+              <PropertyRef Name="prekesNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerkamaPreke_trans">
+          <End Role="Transakcijos" Type="Self.Transakcijos" Multiplicity="1" />
+          <End Role="PerkamaPreke" Type="Self.PerkamaPreke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transakcijos">
+              <PropertyRef Name="transakcijosID" />
+            </Principal>
+            <Dependent Role="PerkamaPreke">
+              <PropertyRef Name="transakcijosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrekiuKategorijos_KategorijosID">
+          <End Role="Kategorija" Type="Self.Kategorija" Multiplicity="1" />
+          <End Role="PrekiuKategorijos" Type="Self.PrekiuKategorijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorija">
+              <PropertyRef Name="KategorijosID" />
+            </Principal>
+            <Dependent Role="PrekiuKategorijos">
+              <PropertyRef Name="KategorijosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrekiuKategorijos_prekesNr">
+          <End Role="Preke" Type="Self.Preke" Multiplicity="1" />
+          <End Role="PrekiuKategorijos" Type="Self.PrekiuKategorijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Preke">
+              <PropertyRef Name="prekesNr" />
+            </Principal>
+            <Dependent Role="PrekiuKategorijos">
+              <PropertyRef Name="prekesNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VartotojoV">
+          <End Role="Vartotojas" Type="Self.Vartotojas" Multiplicity="1" />
+          <End Role="Transakcijos" Type="Self.Transakcijos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vartotojas">
+              <PropertyRef Name="VartotojoVardas" />
+            </Principal>
+            <Dependent Role="Transakcijos">
+              <PropertyRef Name="VartotojoVardas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="Kategorija" EntityType="Self.Kategorija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerkamaPreke" EntityType="Self.PerkamaPreke" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preke" EntityType="Self.Preke" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrekiuKategorijos" EntityType="Self.PrekiuKategorijos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transakcijos" EntityType="Self.Transakcijos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vartotojas" EntityType="Self.Vartotojas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prekiu_perkamumas" EntityType="Self.prekiu_perkamumas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [prekiu_perkamumas].[Pavadinimas] AS [Pavadinimas], 
+    [prekiu_perkamumas].[PerkamasKiekis] AS [PerkamasKiekis]
+    FROM [dbo].[prekiu_perkamumas] AS [prekiu_perkamumas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Suma" EntityType="Self.Suma" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Suma].[transakcijosID] AS [transakcijosID], 
+    [Suma].[VartotojoVardas] AS [VartotojoVardas], 
+    [Suma].[Sum] AS [Sum]
+    FROM [dbo].[Suma] AS [Suma]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_PerkamaPreke_preke" Association="Self.FK_PerkamaPreke_preke">
+            <End Role="Preke" EntitySet="Preke" />
+            <End Role="PerkamaPreke" EntitySet="PerkamaPreke" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerkamaPreke_trans" Association="Self.FK_PerkamaPreke_trans">
+            <End Role="Transakcijos" EntitySet="Transakcijos" />
+            <End Role="PerkamaPreke" EntitySet="PerkamaPreke" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrekiuKategorijos_KategorijosID" Association="Self.FK_PrekiuKategorijos_KategorijosID">
+            <End Role="Kategorija" EntitySet="Kategorija" />
+            <End Role="PrekiuKategorijos" EntitySet="PrekiuKategorijos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrekiuKategorijos_prekesNr" Association="Self.FK_PrekiuKategorijos_prekesNr">
+            <End Role="Preke" EntitySet="Preke" />
+            <End Role="PrekiuKategorijos" EntitySet="PrekiuKategorijos" />
+          </AssociationSet>
+          <AssociationSet Name="VartotojoV" Association="Self.VartotojoV">
+            <End Role="Vartotojas" EntitySet="Vartotojas" />
+            <End Role="Transakcijos" EntitySet="Transakcijos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kategorija">
+          <Key>
+            <PropertyRef Name="KategorijosID" />
+          </Key>
+          <Property Name="KategorijosID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vardas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Prekes" Relationship="Self.PrekiuKategorijos" FromRole="Kategorija" ToRole="Preke" />
+        </EntityType>
+        <EntityType Name="PerkamaPreke">
+          <Key>
+            <PropertyRef Name="transakcijosID" />
+            <PropertyRef Name="prekesNr" />
+          </Key>
+          <Property Name="transakcijosID" Type="Int32" Nullable="false" />
+          <Property Name="prekesNr" Type="Int32" Nullable="false" />
+          <Property Name="PerkamasKiekis" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Preke" Relationship="Self.FK_PerkamaPreke_preke" FromRole="PerkamaPreke" ToRole="Preke" />
+          <NavigationProperty Name="Transakcijo" Relationship="Self.FK_PerkamaPreke_trans" FromRole="PerkamaPreke" ToRole="Transakcijos" />
+        </EntityType>
+        <EntityType Name="Preke">
+          <Key>
+            <PropertyRef Name="prekesNr" />
+          </Key>
+          <Property Name="prekesNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pavadinimas" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kiekis" Type="Int32" Nullable="false" />
+          <Property Name="Kaina" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="PerkamaPrekes" Relationship="Self.FK_PerkamaPreke_preke" FromRole="Preke" ToRole="PerkamaPreke" />
+          <NavigationProperty Name="Kategorijas" Relationship="Self.PrekiuKategorijos" FromRole="Preke" ToRole="Kategorija" />
+        </EntityType>
+        <EntityType Name="Transakcijo">
+          <Key>
+            <PropertyRef Name="transakcijosID" />
+          </Key>
+          <Property Name="transakcijosID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VartotojoVardas" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PerkamaPrekes" Relationship="Self.FK_PerkamaPreke_trans" FromRole="Transakcijos" ToRole="PerkamaPreke" />
+          <NavigationProperty Name="Vartotoja" Relationship="Self.VartotojoV" FromRole="Transakcijos" ToRole="Vartotojas" />
+        </EntityType>
+        <EntityType Name="Vartotoja">
+          <Key>
+            <PropertyRef Name="VartotojoVardas" />
+          </Key>
+          <Property Name="VartotojoVardas" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Slaptazodis" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Miestas" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gatve" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Namas" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Butas" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Transakcijos" Relationship="Self.VartotojoV" FromRole="Vartotojas" ToRole="Transakcijos" />
+        </EntityType>
+        <EntityType Name="prekiu_perkamumas">
+          <Key>
+            <PropertyRef Name="Pavadinimas" />
+          </Key>
+          <Property Name="Pavadinimas" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PerkamasKiekis" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Suma">
+          <Key>
+            <PropertyRef Name="transakcijosID" />
+            <PropertyRef Name="VartotojoVardas" />
+          </Key>
+          <Property Name="transakcijosID" Type="Int32" Nullable="false" />
+          <Property Name="VartotojoVardas" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <Association Name="FK_PerkamaPreke_preke">
+          <End Role="Preke" Type="Self.Preke" Multiplicity="1" />
+          <End Role="PerkamaPreke" Type="Self.PerkamaPreke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Preke">
+              <PropertyRef Name="prekesNr" />
+            </Principal>
+            <Dependent Role="PerkamaPreke">
+              <PropertyRef Name="prekesNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerkamaPreke_trans">
+          <End Role="Transakcijos" Type="Self.Transakcijo" Multiplicity="1" />
+          <End Role="PerkamaPreke" Type="Self.PerkamaPreke" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transakcijos">
+              <PropertyRef Name="transakcijosID" />
+            </Principal>
+            <Dependent Role="PerkamaPreke">
+              <PropertyRef Name="transakcijosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VartotojoV">
+          <End Role="Vartotojas" Type="Self.Vartotoja" Multiplicity="1" />
+          <End Role="Transakcijos" Type="Self.Transakcijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vartotojas">
+              <PropertyRef Name="VartotojoVardas" />
+            </Principal>
+            <Dependent Role="Transakcijos">
+              <PropertyRef Name="VartotojoVardas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PrekiuKategorijos">
+          <End Role="Kategorija" Type="Self.Kategorija" Multiplicity="*" />
+          <End Role="Preke" Type="Self.Preke" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kategorijas" EntityType="Self.Kategorija" />
+          <EntitySet Name="PerkamaPrekes" EntityType="Self.PerkamaPreke" />
+          <EntitySet Name="Prekes" EntityType="Self.Preke" />
+          <EntitySet Name="Transakcijos" EntityType="Self.Transakcijo" />
+          <EntitySet Name="Vartotojas" EntityType="Self.Vartotoja" />
+          <EntitySet Name="prekiu_perkamumas" EntityType="Self.prekiu_perkamumas" />
+          <EntitySet Name="Sumas" EntityType="Self.Suma" />
+          <AssociationSet Name="FK_PerkamaPreke_preke" Association="Self.FK_PerkamaPreke_preke">
+            <End Role="Preke" EntitySet="Prekes" />
+            <End Role="PerkamaPreke" EntitySet="PerkamaPrekes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerkamaPreke_trans" Association="Self.FK_PerkamaPreke_trans">
+            <End Role="Transakcijos" EntitySet="Transakcijos" />
+            <End Role="PerkamaPreke" EntitySet="PerkamaPrekes" />
+          </AssociationSet>
+          <AssociationSet Name="VartotojoV" Association="Self.VartotojoV">
+            <End Role="Vartotojas" EntitySet="Vartotojas" />
+            <End Role="Transakcijos" EntitySet="Transakcijos" />
+          </AssociationSet>
+          <AssociationSet Name="PrekiuKategorijos" Association="Self.PrekiuKategorijos">
+            <End Role="Kategorija" EntitySet="Kategorijas" />
+            <End Role="Preke" EntitySet="Prekes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
+          <EntitySetMapping Name="Kategorijas">
+            <EntityTypeMapping TypeName="dbModel.Kategorija">
+              <MappingFragment StoreEntitySet="Kategorija">
+                <ScalarProperty Name="KategorijosID" ColumnName="KategorijosID" />
+                <ScalarProperty Name="Vardas" ColumnName="Vardas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerkamaPrekes">
+            <EntityTypeMapping TypeName="dbModel.PerkamaPreke">
+              <MappingFragment StoreEntitySet="PerkamaPreke">
+                <ScalarProperty Name="transakcijosID" ColumnName="transakcijosID" />
+                <ScalarProperty Name="prekesNr" ColumnName="prekesNr" />
+                <ScalarProperty Name="PerkamasKiekis" ColumnName="PerkamasKiekis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prekes">
+            <EntityTypeMapping TypeName="dbModel.Preke">
+              <MappingFragment StoreEntitySet="Preke">
+                <ScalarProperty Name="prekesNr" ColumnName="prekesNr" />
+                <ScalarProperty Name="Pavadinimas" ColumnName="Pavadinimas" />
+                <ScalarProperty Name="Kiekis" ColumnName="Kiekis" />
+                <ScalarProperty Name="Kaina" ColumnName="Kaina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transakcijos">
+            <EntityTypeMapping TypeName="dbModel.Transakcijo">
+              <MappingFragment StoreEntitySet="Transakcijos">
+                <ScalarProperty Name="transakcijosID" ColumnName="transakcijosID" />
+                <ScalarProperty Name="VartotojoVardas" ColumnName="VartotojoVardas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vartotojas">
+            <EntityTypeMapping TypeName="dbModel.Vartotoja">
+              <MappingFragment StoreEntitySet="Vartotojas">
+                <ScalarProperty Name="VartotojoVardas" ColumnName="VartotojoVardas" />
+                <ScalarProperty Name="Slaptazodis" ColumnName="Slaptazodis" />
+                <ScalarProperty Name="Miestas" ColumnName="Miestas" />
+                <ScalarProperty Name="Gatve" ColumnName="Gatve" />
+                <ScalarProperty Name="Namas" ColumnName="Namas" />
+                <ScalarProperty Name="Butas" ColumnName="Butas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prekiu_perkamumas">
+            <EntityTypeMapping TypeName="dbModel.prekiu_perkamumas">
+              <MappingFragment StoreEntitySet="prekiu_perkamumas">
+                <ScalarProperty Name="Pavadinimas" ColumnName="Pavadinimas" />
+                <ScalarProperty Name="PerkamasKiekis" ColumnName="PerkamasKiekis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sumas">
+            <EntityTypeMapping TypeName="dbModel.Suma">
+              <MappingFragment StoreEntitySet="Suma">
+                <ScalarProperty Name="transakcijosID" ColumnName="transakcijosID" />
+                <ScalarProperty Name="VartotojoVardas" ColumnName="VartotojoVardas" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PrekiuKategorijos" TypeName="dbModel.PrekiuKategorijos" StoreEntitySet="PrekiuKategorijos">
+            <EndProperty Name="Kategorija">
+              <ScalarProperty Name="KategorijosID" ColumnName="KategorijosID" />
+            </EndProperty>
+            <EndProperty Name="Preke">
+              <ScalarProperty Name="prekesNr" ColumnName="prekesNr" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

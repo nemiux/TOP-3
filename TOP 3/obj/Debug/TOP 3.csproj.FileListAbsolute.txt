@@ -1,0 +1,28 @@
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\db.mdf
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\db_log.ldf
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\dbDataSet.Designer.cs
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\dbDataSet.xsc
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\dbDataSet.xsd
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\dbDataSet.xss
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\TOP 3.exe.config
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\TOP 3.exe
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\TOP 3.pdb
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\EntityFramework.dll
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\EntityFramework.xml
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP 3.csprojResolveAssemblyReference.cache
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.NaujaPreke.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.NaujasVartotojas.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.NaujaTransakcija.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.Perkama.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.PerkamaP.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.PrekiuValdymas.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.TopProducts.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.TransakcijuValdymas.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.VartotojuValdymas.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.MainWindow.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP_3.Properties.Resources.resources
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP 3.csproj.GenerateResource.Cache
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP 3.exe
+C:\Users\Tomas\Documents\Visual Studio 2015\Projects\TOP 3\TOP 3\obj\Debug\TOP 3.pdb
